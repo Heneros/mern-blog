@@ -1,4 +1,4 @@
-const { GraphQLObjectType, GraphQLID, GraphQLString, GraphQLList } = require('graphql');
+const { GraphQLObjectType, GraphQLID, GraphQLString, GraphQLList, GraphQLSchema } = require('graphql');
 const Posts = require('../models/Posts');
 
 const PostsType = new GraphQLObjectType({
@@ -22,10 +22,14 @@ const RootQuery = new GraphQLObjectType({
         },
         post: {
             type: PostsType,
-            args: {id: {type: GraphQLID}},
-            resolve(parent, args){
+            args: { id: { type: GraphQLID } },
+            resolve(parent, args) {
                 return Posts.findById(args.id);
             }
         }
     }
+})
+
+module.exports = new GraphQLSchema({
+    query: RootQuery
 })

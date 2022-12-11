@@ -14,6 +14,7 @@ const app = express();
 connectDB();
 
 app.use('/graphql', graphqlHTTP({
+    schema,
     graphiql: true
 }))
 
