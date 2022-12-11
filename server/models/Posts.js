@@ -1,8 +1,6 @@
 const mongoose = require('mongoose');
 
 
-
-
 const PostsSchema = new mongoose.Schema({
     name: {
         type: String
@@ -12,7 +10,7 @@ const PostsSchema = new mongoose.Schema({
     },
     imageUrl: {
         type: String
-    }
+    },
 })
 
 module.exports = mongoose.model("Posts", PostsSchema);

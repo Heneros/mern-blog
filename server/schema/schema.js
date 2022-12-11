@@ -1,4 +1,4 @@
-const { GraphQLObjectType, GraphQLID, GraphQLString, GraphQLList, GraphQLSchema } = require('graphql');
+const { GraphQLObjectType, GraphQLID, GraphQLString, GraphQLList, GraphQLSchema, GraphQLNonNull } = require('graphql');
 const Posts = require('../models/Posts');
 
 const PostsType = new GraphQLObjectType({
@@ -28,8 +28,41 @@ const RootQuery = new GraphQLObjectType({
             }
         }
     }
+});
+
+const mutation = new GraphQLObjectType({
+    name: 'Mutation',
+    fields: {
+        addPost: {
+            type: PostsType,
+            args: {
+                name: { type: new GraphQLNonNull(GraphQLString) },
+                description: { type: new GraphQLNonNull(GraphQLString) },
+                imageUrl: { type: new GraphQLNonNull(GraphQLString) },
+            },
+            resolve(parent, args) {
+                const post = new Posts({
+                    name: args.name,
+                    description: args.description,
+                    imageUrl: args.imageUrl
+                });
+                return post.save();
+            },
+        },
+        deletePost: {
+            type: PostsType,
+            args: {
+                id: { type: new GraphQLNonNull(GraphQLID) },
+            },
+            resolve(parent, args) {
+                return Posts.findByIdAndRemove(args.id);
+            }
+        }
+    }
 })
 
+
 module.exports = new GraphQLSchema({
+    mutation,
     query: RootQuery
 })
