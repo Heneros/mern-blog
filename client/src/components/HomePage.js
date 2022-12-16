@@ -1,5 +1,5 @@
 import React from 'react'
-import BlogPost from './BlogPost'
+import BlogPosts from './BlogPosts'
 import Header from './Header'
 
 export default function HomePage() {
@@ -7,7 +7,7 @@ export default function HomePage() {
         <>
             <Header />
             <div className='container'>
-                <BlogPost />
+                <BlogPosts />
             </div>
         </>
 
