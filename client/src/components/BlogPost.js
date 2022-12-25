@@ -1,24 +1,41 @@
 import React from 'react'
+import { useMutation } from '@apollo/client';
+import { DELETE_POST } from '../graphql/mutations';
+import { GET_POSTS } from '../graphql/queries';
 
 export default function BlogPost({ post }) {
+
+    const [deletePost] = useMutation(DELETE_POST, {
+        variables: { id: post.id },
+        update(cache, { data: { deletePost } }) {
+            const { posts } = cache.readQuery({ query: GET_POSTS });
+            cache.writeQuery({
+                query: GET_POSTS,
+                data: { posts: posts.filter(post => post.id !== deletePost.id) },
+            });
+        }
+    })
 
     const { id, name, description, imageUrl } = post;
 
     return (
-        <article class="post">
-            <div class="post-header" >
-                <h2 class="post-title"><a href={`/posts/${id}`}>{name}</a></h2>
+        <article className="post">
+            <div className="post-header" >
+                <h2 className="post-title"><a href={`/posts/${id}`}>{name}</a></h2>
             </div>
-            <div class="post-preview" >
+            <div className="post-preview" >
                 <a href={`/posts/${id}`}>
-                    <img src={imageUrl} alt="" class="img-fluid rounded" /></a>
+                    <img src={imageUrl} alt="" className="img-fluid rounded" /></a>
             </div>
-            <div class="post-content" >
+            <div className="post-content" >
                 <p>
                     {description}
                 </p>
             </div>
-            <div ><a href={`/posts/${id}`} class="btn btn-outline-custom">Read More</a></div>
+            <div className='bottom-post'>
+                <a href={`/posts/${id}`} className="btn btn-outline-custom">Read More</a>
+                <a href="#!" className='btn btn-danger' onClick={deletePost}>Delete</a>
+            </div>
         </article>
     )
 }

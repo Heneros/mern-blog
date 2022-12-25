@@ -902,12 +902,15 @@ textarea.form-control {
     border-color: #0db3e3;
 }
 
+
+.bottom-post{
+    display: flex;
+    justify-content: space-between;
+}
 `;
 
 
 export default GlobalStyles;
-
-
 
 
 

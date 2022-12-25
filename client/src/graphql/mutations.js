@@ -11,23 +11,15 @@ mutation addPost($name: String!,$description: String!,$imageUrl: String!){
 }
 `
 
-
-export { ADD_POST };
-
-
-
-
-
-
-
-
-
+const DELETE_POST = gql`
+mutation deletePost($id: ID!){
+    deletePost(id: $id){
+        id, 
+        name,
+        description,
+        imageUrl
+    }
+}`;
 
 
-
-
-
-
-
-
-
+export { ADD_POST, DELETE_POST };
