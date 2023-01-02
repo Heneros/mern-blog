@@ -1,12 +1,13 @@
 import { useMutation } from '@apollo/client';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ADD_POST } from '../graphql/mutations';
-import { GET_POST, GET_POSTS } from '../graphql/queries';
+import { GET_POSTS } from '../graphql/queries';
 
 export default function CreatePost() {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [imageUrl, setImageUrl] = useState('');
+
 
   const [addPost] = useMutation(ADD_POST, {
     variables: { name, description, imageUrl },
@@ -33,9 +34,19 @@ export default function CreatePost() {
     setDescription('');
     setImageUrl('');
   }
+  const [count, setCount] = useState(0);
+  const [calculation, setCalculation] = useState(0);
+
+  useEffect(() => {
+    setCalculation(() => count * 2);
+  }, [count]);
+
   return (
     <>
-      <button type="button" data-bs-target="#addPostModal" data-toggle="modal" data-target="#addPostModal" className="btn btn-primary">
+      You clicked {count} times.
+      <button
+        onClick={() => setCount((c) => c + 1)}
+        type="button" data-bs-target="#addPostModal" data-toggle="modal" data-target="#addPostModal" className="btn btn-primary">
         Add Post
       </button>
       <div className="modal fade" id="addPostModal" role="dialog" aria-labelledby="addPostModalLabel" aria-hidden="true">

@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import BlogPosts from '../components/BlogPosts'
 import Header from '../components/Header'
 import CreatePost from '../components/CreatePost'
 export default function HomePage() {
+
     return (
         <>
             <Header />
@@ -13,10 +14,12 @@ export default function HomePage() {
                         <BlogPosts />
                     </div>
                     <div className="col-xl-4">
+                        {/* You clicked {count} times. */}
+
                         <div className="btns">
                             <CreatePost />
-                        </div>                  
-                     </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </>
