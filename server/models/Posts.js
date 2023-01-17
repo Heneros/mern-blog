@@ -11,7 +11,12 @@ const PostsSchema = new mongoose.Schema({
     imageUrl: {
         type: String
     },
-})
+},
+    {
+        timestamps: true
+    }
+
+)
 
 module.exports = mongoose.model("Posts", PostsSchema);
 
