@@ -9,6 +9,7 @@ import express from "express";
 import * as dotenv from 'dotenv';
 import { connectDB } from "./config/db.js";
 import { postCreateValidation } from "./validation.js";
+import { PostController} from './controllers/index.js';
 
 // import * from './config/db';
 dotenv.config()
@@ -28,14 +29,15 @@ connectDB();
 
 app.use(cors());
 app.get('/', (req, res) => {
-    res.send('Hello World');
+    console.log('Hello World');
 });
+
 // app.use('/graphql', graphqlHTTP({
 //     schema,
 //     graphiql: true
 // }))
 
-app.post('/post', postCreateValidation,)
+app.post('/post', postCreateValidation, PostController)
 
 
 app.listen(port, console.log(`Server running on port ${port}`));
