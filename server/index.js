@@ -37,7 +37,7 @@ app.get('/', (req, res) => {
 //     graphiql: true
 // }))
 
-app.post('/post', postCreateValidation, PostController)
+app.post('/posts', postCreateValidation, PostController.create)
 
 
 app.listen(port, console.log(`Server running on port ${port}`));
