@@ -9,7 +9,7 @@ import express from "express";
 import * as dotenv from 'dotenv';
 import { connectDB } from "./config/db.js";
 import { postCreateValidation } from "./validation.js";
-import { PostController} from './controllers/index.js';
+import { PostController } from './controllers/index.js';
 
 // import * from './config/db';
 dotenv.config()
@@ -17,19 +17,20 @@ dotenv.config()
 // const connectDB = require("./config/db");
 // import connectDB from "./config/db";
 
- 
+
 const port = process.env.PORT || 5000;
 // const { graphqlHTTP } = require("express-graphql");
 // const { postCreateValidation } = require("./validation");
 
 const app = express();
 
-
+app.use(express.json());
+app.use(cors());
 connectDB();
 
 app.use(cors());
 app.get('/', (req, res) => {
-    console.log('Hello World');
+    res.send('Hello World');
 });
 
 // app.use('/graphql', graphqlHTTP({
@@ -37,7 +38,7 @@ app.get('/', (req, res) => {
 //     graphiql: true
 // }))
 
-app.post('/posts', postCreateValidation, PostController.create)
+app.post('/posts', PostController.create)
 
 
 app.listen(port, console.log(`Server running on port ${port}`));
