@@ -31,5 +31,6 @@ app.get('/posts', PostController.getAll);
 app.get('/posts/:id', PostController.getOne);
 app.post('/posts', postCreateValidation, PostController.create);
 app.patch('/posts/:id', postCreateValidation, PostController.update);
+app.delete('/posts/:id', PostController.remove )
 
 app.listen(port, console.log(`Server running on port ${port}`));

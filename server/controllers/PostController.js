@@ -92,3 +92,33 @@ export const getAll = async (req, res) => {
         });
     }
 }
+
+
+
+export const remove = async (req, res) => {
+    try {
+        const postId = req.params.id;
+        PostsModel.findOneAndDelete({
+            _id: postId
+        }, (err, doc) => {
+            if (err) {
+                console.log(err);
+                res.status(500).json({
+                    message: 'Failed to delete post.',
+                });
+            } else if (!doc) {
+                res.status(404).json({
+                    message: 'Post not found'
+                });
+            }
+            res.json({
+                success: true
+            });
+        });
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({
+            message: 'Failed to delete post.',
+        });
+    }
+}
