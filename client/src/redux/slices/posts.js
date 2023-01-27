@@ -28,7 +28,7 @@ const postsSlice = createSlice({
             state.posts.items = action.payload;
             state.posts.status = 'loaded'
         },
-        [fetchPosts.fulfilled]: (state) => {
+        [fetchPosts.rejected]: (state) => {
             state.posts.items = [];
             state.posts.status = 'error'
         }

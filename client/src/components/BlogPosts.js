@@ -4,7 +4,7 @@ import { GET_POSTS } from '../graphql/queries';
 import axios from '../axios';
 import { useParams } from 'react-router-dom';
 
-import BlogPost from './BlogPost';
+import { BlogPost } from './BlogPost';
 import { useState } from 'react';
 
 
@@ -39,10 +39,12 @@ function BlogPosts() {
 
   return (
     <>
- 
-      {/* {data.posts.map(post => (
-        <BlogPost key={post.id} post={post} />
-      ))} */}
+
+      <BlogPost
+        id={data._id}
+        title={data.title}
+        imageUrl={data.imageUrl}
+      />
 
     </>
   )

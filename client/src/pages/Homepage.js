@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 
 
-import BlogPosts from '../components/BlogPosts';
+import { BlogPost } from '../components/BlogPost';
 import Header from '../components/Header';
 import CreatePost from '../components/CreatePost';
 import { fetchPosts } from '../redux/slices/posts';
@@ -11,12 +11,15 @@ import { fetchPosts } from '../redux/slices/posts';
 export default function HomePage() {
     const dispatch = useDispatch();
     const { posts } = useSelector(state => state.posts);
+
     const isPostsLoading = posts.status === 'loading';
 
     React.useEffect(() => {
         dispatch(fetchPosts());
     }, []);
-    console.log(posts);
+
+    console.log(posts)
+
 
     return (
         <>
@@ -25,13 +28,16 @@ export default function HomePage() {
                 <div className="row">
                     <div className="col-xl-8">
                         {(isPostsLoading ? [...Array(1)] : posts.items).map((obj, index) => isPostsLoading ? (
-                            ////  <span>Posts not found.</span>
-                            <BlogPosts
+                            // <span>Posts not found.</span>
+                            <BlogPost
                                 key={index}
+                                isLoading={true}
                             />
                         ) : (
-                            <BlogPosts
+                            <BlogPost
                                 id={obj._id}
+                                title={obj.title}
+                                imageUrl={obj.imageUrl}
                             />
                         )
                         )};
