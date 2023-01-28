@@ -27,7 +27,7 @@ export default function HomePage() {
             <div className='container'>
                 <div className="row">
                     <div className="col-xl-8">
-                        {(isPostsLoading ? [...Array(1)] : posts.items).map((obj, index) => isPostsLoading ? (
+                        {(isPostsLoading ? [...Array(5)] : posts.items).map((obj, index) => isPostsLoading ? (
                             // <span>Posts not found.</span>
                             <BlogPost
                                 key={index}
@@ -37,14 +37,16 @@ export default function HomePage() {
                             <BlogPost
                                 id={obj._id}
                                 title={obj.title}
+                                text={obj.text}
                                 imageUrl={obj.imageUrl}
                             />
                         )
                         )};
+
                     </div>
                     <div className="col-xl-4">
                         <div className="btns">
-                            <CreatePost />
+                            {/* <CreatePost /> */}
                         </div>
                     </div>
                 </div>

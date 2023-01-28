@@ -24,7 +24,7 @@ const postsSlice = createSlice({
             state.posts.items = [];
             state.posts.status = 'loading'
         },
-        [fetchPosts.fulfilled]: (action, state) => {
+        [fetchPosts.fulfilled]: (state, action ) => {
             state.posts.items = action.payload;
             state.posts.status = 'loaded'
         },
