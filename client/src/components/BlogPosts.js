@@ -1,7 +1,6 @@
 import React from 'react'
 
-import axios from '../axios';
-import { useParams } from 'react-router-dom';
+
 
 import { BlogPost } from './BlogPost';
 import { useState } from 'react';
@@ -11,24 +10,7 @@ import { useState } from 'react';
 
 function BlogPosts() {
 
-  const { id } = useParams();
-
   const [data, setData] = useState();
-  const [isLoading, setLoading] = useState(true);
-
-
-  React.useEffect(() => {
-    axios
-      .get(`/posts/${id}`)
-      .then((res) => {
-        setData(res.data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.warn(err + `Error`);
-        // alert(`Error`);
-      }, [])
-  });
 
   return (
     <>

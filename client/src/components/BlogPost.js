@@ -5,11 +5,8 @@ export const BlogPost = ({
     id,
     title,
     text,
-    createdAt,
     imageUrl
 }) => {
-
-
     return (
         <>
             <article className="post">
