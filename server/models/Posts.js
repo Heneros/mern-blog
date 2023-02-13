@@ -9,8 +9,13 @@ const PostSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    imageUrl: String
+    imageUrl: String,
+    viewsCount: {
+        type: Number,
+        default: 0
+    },
 },
+
     {
         timestamps: true,
     },

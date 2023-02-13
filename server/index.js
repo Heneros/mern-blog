@@ -19,14 +19,11 @@ app.use(cors());
 connectDB();
 
 app.use(cors());
-app.get('/', (req, res) => {
-    res.send('Hello World');
-});
+// app.get('/', (req, res) => {
+//     res.send('Hello World');
+// });
 
-// app.use('/graphql', graphqlHTTP({
-//     schema,
-//     graphiql: true
-// }))
+
 app.get('/posts', PostController.getAll);
 app.get('/posts/:id', PostController.getOne);
 app.post('/posts', postCreateValidation, PostController.create);
