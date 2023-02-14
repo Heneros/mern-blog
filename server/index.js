@@ -3,8 +3,10 @@ import cors from "cors";
 import express from "express";
 import * as dotenv from 'dotenv';
 import { connectDB } from "./config/db.js";
-import { postCreateValidation } from "./validation.js";
+import { postCreateValidation, registerValidation } from "./validation.js";
+import { handleValidationErrors } from './utils/index.js';
 import { PostController } from './controllers/index.js';
+
 dotenv.config()
 
 
@@ -23,11 +25,12 @@ app.use(cors());
 //     res.send('Hello World');
 // });
 
+app.post('/auth/register', handleValidationErrors, registerValidation);
 
 app.get('/posts', PostController.getAll);
 app.get('/posts/:id', PostController.getOne);
 app.post('/posts', postCreateValidation, PostController.create);
 app.patch('/posts/:id', postCreateValidation, PostController.update);
-app.delete('/posts/:id', PostController.remove )
+app.delete('/posts/:id', PostController.remove)
 
 app.listen(port, console.log(`Server running on port ${port}`));
