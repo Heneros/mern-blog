@@ -5,7 +5,8 @@ import * as dotenv from 'dotenv';
 import { connectDB } from "./config/db.js";
 import { postCreateValidation, registerValidation } from "./validation.js";
 import { handleValidationErrors } from './utils/index.js';
-import { PostController } from './controllers/index.js';
+import { PostController, UserController } from './controllers/index.js';
+
 
 dotenv.config()
 
@@ -25,7 +26,7 @@ app.use(cors());
 //     res.send('Hello World');
 // });
 
-app.post('/auth/register', handleValidationErrors, registerValidation);
+app.post('/auth/register', handleValidationErrors, registerValidation, UserController.register);
 
 app.get('/posts', PostController.getAll);
 app.get('/posts/:id', PostController.getOne);
