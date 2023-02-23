@@ -3,8 +3,8 @@ import cors from "cors";
 import express from "express";
 import * as dotenv from 'dotenv';
 import { connectDB } from "./config/db.js";
-import { postCreateValidation, registerValidation } from "./validation.js";
-import { handleValidationErrors } from './utils/index.js';
+import { postCreateValidation, registerValidation, loginValidation } from "./validation.js";
+import { handleValidationErrors, checkAuth } from './utils/index.js';
 import { PostController, UserController } from './controllers/index.js';
 
 
@@ -27,6 +27,9 @@ app.use(cors());
 // });
 
 app.post('/auth/register', handleValidationErrors, registerValidation, UserController.register);
+app.post('/auth/login', handleValidationErrors, loginValidation, UserController.login);
+app.get('/auth/me', checkAuth, UserController.getMe);
+
 
 app.get('/posts', PostController.getAll);
 app.get('/posts/:id', PostController.getOne);

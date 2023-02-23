@@ -51,6 +51,26 @@ export const login = async (req, res) => {
             });
         }
         const isValidPass = await bcrypt.compare(req.body.password, user._doc.passwordHash);
+        if (!isValidPass) {
+            return res.status(400).json({
+                message: "Password or user are wrong."
+            })
+        }
+        const token = jwt.sign(
+            {
+                _id: user._id,
+            },
+            'uniquekey'
+            , {
+                expiresIn: '30d'
+            }
+        );
+        const { passwordHash, ...userData } = user._doc;
+
+        res.json({
+            ...userData,
+            token
+        });
     } catch (err) {
         console.log(err);
         res.status(500).json({
@@ -62,14 +82,18 @@ export const login = async (req, res) => {
 
 export const getMe = async (req, res) => {
     try {
-        const user = UserModel.findById(req.userId);
+        const user = await UserModel.findById(req.userId);
         if (!user) {
             return res.status(404).json({
                 message: "User not found"
             });
         }
-
+        const { passwordHash, ...userData } = user._doc;
+        res.json({ userData });
     } catch (err) {
-
+        console.log(err);
+        res.status(500).json({
+            message: "Failed to register"
+        });
     }
 }
