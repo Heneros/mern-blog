@@ -12,10 +12,30 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useDispatch, useSelector } from 'react-redux';
+import { useForm } from 'react-hook-form';
 
-import Header  from '../components/Header';
+import Header from '../components/Header';
+import { fetchRegister, selectIsAuth } from '../redux/slices/auth';
 
 export default function Registration() {
+    const isAuth = useSelector(selectIsAuth);
+    const dispatch = useDispatch();
+
+    const { register, handleSubmit, formState: { errors, isValid } } = useForm({
+        defaultValues: {
+            firstName: 'Gordon',
+            lastName: 'Freeman',
+            password: '123456d'
+        },
+        mode: 'onChange'
+    });
+
+    const onSubmit = async (values) => {
+        const data = await dispatch(fetchRegister(values));
+    }
+
+
     return (
         <>
             <Header />
@@ -31,7 +51,7 @@ export default function Registration() {
                     <Typography component="h1" variant="h5">
                         Sign up
                     </Typography>
-                    <Box component="form" sx={{ mt: 8 }}>
+                    <Box component="form" onSubmit={handleSubmit(onSubmit)} sx={{ mt: 8 }}>
                         <Grid container spacing={2}>
                             <Grid item xs={12} sm={6}>
                                 <TextField
@@ -42,6 +62,7 @@ export default function Registration() {
                                     id="firstName"
                                     label="First Name"
                                     autoFocus
+                                    {...register('firstName', { required: 'Enter firstName' })}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={6}>
@@ -52,6 +73,7 @@ export default function Registration() {
                                     label="Last Name"
                                     name="lastName"
                                     autoComplete="family-name"
+                                    {...register('lastName', { required: 'Enter lastName' })}
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -63,9 +85,16 @@ export default function Registration() {
                                     type="password"
                                     id="password"
                                     autoComplete="new-password"
+                                    {...register('password', { required: 'Enter password' })}
                                 />
                             </Grid>
                         </Grid>
+                        <Button
+                            sx={{ display: 'flex', mt: 2, justifyContent: 'center' }}
+                            type="submit"
+                            fullWidth
+                            variant='outlined'
+                            color="success">Submit</Button>
                     </Box>
                 </Box>
             </Container>
