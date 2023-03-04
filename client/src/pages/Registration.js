@@ -11,12 +11,12 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 
 import Header from '../components/Header';
 import { fetchRegister, selectIsAuth } from '../redux/slices/auth';
+import { Navigate } from 'react-router-dom';
 
 export default function Registration() {
     const isAuth = useSelector(selectIsAuth);
@@ -24,8 +24,8 @@ export default function Registration() {
 
     const { register, handleSubmit, formState: { errors, isValid } } = useForm({
         defaultValues: {
-            firstName: 'Gordon',
-            lastName: 'Freeman',
+            fullName: 'Gordon',
+            email: 'Freeman',
             password: '123456d'
         },
         mode: 'onChange'
@@ -33,6 +33,16 @@ export default function Registration() {
 
     const onSubmit = async (values) => {
         const data = await dispatch(fetchRegister(values));
+        console.log(data);
+        if (!data.payload) {
+            return alert('Failed to log in.');
+        }
+        if ('token' in data.payload) {
+            window.localStorage.setItem('token', data.payload.token)
+        }
+    }
+    if (isAuth) {
+        return <Navigate to="/" />
     }
 
 
@@ -56,24 +66,25 @@ export default function Registration() {
                             <Grid item xs={12} sm={6}>
                                 <TextField
                                     autoComplete="given-name"
-                                    name="firstName"
+                                    name="fullName"
                                     required
                                     fullWidth
-                                    id="firstName"
+                                    id="fullName"
                                     label="First Name"
                                     autoFocus
-                                    {...register('firstName', { required: 'Enter firstName' })}
+                                    {...register('fullName', { required: 'Enter fullName' })}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={6}>
                                 <TextField
                                     required
                                     fullWidth
-                                    id="lastName"
-                                    label="Last Name"
-                                    name="lastName"
-                                    autoComplete="family-name"
-                                    {...register('lastName', { required: 'Enter lastName' })}
+                                    id="email"
+                                    type="email"
+                                    label="Email"
+                                    name="email"
+                                    autoComplete="Email"
+                                    {...register('email', { required: 'Enter email' })}
                                 />
                             </Grid>
                             <Grid item xs={12}>
