@@ -105,7 +105,7 @@ export default function Registration() {
                             type="submit"
                             fullWidth
                             variant='outlined'
-                            color="success">Submit</Button>
+                            color="success">Sign up</Button>
                     </Box>
                 </Box>
             </Container>
