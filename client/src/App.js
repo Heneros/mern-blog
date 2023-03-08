@@ -6,6 +6,7 @@ import HomePage from './pages/Homepage';
 
 import SinglePost from './pages/SinglePost';
 import Registration from './pages/Registration';
+import Login from './pages/Login';
 import NotFound from './pages/NotFound';
 
 
@@ -16,6 +17,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/registration" element={<Registration />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/posts/:id" element={<SinglePost />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

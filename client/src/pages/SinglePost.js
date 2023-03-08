@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom'
 
 
 import axios from '../axios';
+import Header from '../components/Header';
 
 
 export default function SinglePost() {
@@ -27,12 +28,8 @@ export default function SinglePost() {
 
     return (
         <>
-            <BlogPost
-                id={data?.id}
-                title={data?.title}
-                imageUrl={data?.imageUrl}
-                text={data?.text}
-            />
+            <Header />
+
             <p>
                 {data?.text}
             </p>

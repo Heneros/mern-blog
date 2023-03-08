@@ -7,9 +7,22 @@ import { Link } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 
 import Toolbar from '@mui/material/Toolbar';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout, selectIsAuth } from '../redux/slices/auth';
+import { Button } from '@mui/material';
 
 
 function Header() {
+    const isAuth = useSelector(selectIsAuth);
+    const dispatch = useDispatch();
+
+    const onClickLogout = () => {
+        if (window.confirm("Are you sure you want to log out")) {
+            dispatch(logout());
+            window.localStorage.removeItem('token');
+        }
+    }
+
     return (
         <>
             <AppBar
@@ -26,12 +39,22 @@ function Header() {
                     </Typography>
                     <nav>
                         <Box sx={{ display: 'inline-flex', flexDirection: 'row' }}>
-                            <Typography sx={{ my: 1, mx: 1.5 }}>
-                                <Link to="/registration">Sign Up</Link>
-                            </Typography>
-                            <Typography sx={{ my: 1, mx: 1.5 }} >
-                                Log In
-                            </Typography>
+                            {isAuth ? (
+                                <>
+                                    <Typography sx={{ my: 1, mx: 1.5 }}>
+                                        <Button onClick={onClickLogout} >Log Out</Button>
+                                    </Typography>
+                                </>
+                            ) : (
+                                <>
+                                    <Typography sx={{ my: 1, mx: 1.5 }} >
+                                        <Link to="/login">Log In</Link>
+                                    </Typography>
+                                    <Typography sx={{ my: 1, mx: 1.5 }}>
+                                        <Link to="/registration">Sign Up</Link>
+                                    </Typography>
+                                </>
+                            )}
                         </Box>
                     </nav>
                 </Toolbar>
