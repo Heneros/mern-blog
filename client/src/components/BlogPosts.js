@@ -1,26 +1,22 @@
-import React from 'react'
+// import React from 'react'
 
 
 
-import { BlogPost } from './BlogPost';
-import { useState } from 'react';
+// import { BlogPost } from './BlogPost';
+// import { useState } from 'react';
 
 
 
 
-function BlogPosts() {
+// function BlogPosts() {
 
-  const [data, setData] = useState();
+//   const [data, setData] = useState();
 
-  return (
-    <>
-      <BlogPost
-        id={data._id}
-        title={data.title}
-        imageUrl={data.imageUrl}
-      />
-    </>
-  )
-}
+//   return (
+//     <>
+//       <BlogPost/>
+//     </>
+//   )
+// }
 
-export default BlogPosts;
+// export default BlogPosts;

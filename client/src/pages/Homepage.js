@@ -18,7 +18,7 @@ export default function HomePage() {
         dispatch(fetchPosts());
     }, []);
 
-    console.log(posts)
+    ///   console.log(posts)
 
 
     return (
@@ -27,13 +27,14 @@ export default function HomePage() {
             <div className='container'>
                 <div className="row">
                     <div className="col-xl-8">
+                        {/* /////   [...Array(5)] : заглушка пока posts.items не загружены*/}
                         {(isPostsLoading ? [...Array(5)] : posts.items).map((obj, index) => isPostsLoading ? (
-                            // <span>Posts not found.</span>
                             <BlogPost
                                 key={index}
                                 isLoading={true}
                             />
                         ) : (
+                   
                             <BlogPost
                                 id={obj._id}
                                 title={obj.title}
@@ -42,7 +43,6 @@ export default function HomePage() {
                             />
                         )
                         )};
-
                     </div>
                     <div className="col-xl-4">
                         <div className="btns">

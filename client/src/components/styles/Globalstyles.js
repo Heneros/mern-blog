@@ -5,15 +5,6 @@ import { createGlobalStyle } from "styled-components";
 
 const GlobalStyles = createGlobalStyle`
 
-/********************
-*                   *
-*   1.Helper        *
-*   2.Navbar        *
-*   3.Blog          *
-*   4.Pagination    *
-*   5.Responsive    *
-*                   *
-*********************/
 
 body {
     font-family: 'Nunito Sans', sans-serif;
@@ -907,7 +898,13 @@ textarea.form-control {
     display: flex;
     justify-content: space-between;
 }
+
+.hovered{
+    background-color: rgba(0,0,0,0.5);
+}
 `;
+
+
 
 
 export default GlobalStyles;

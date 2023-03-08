@@ -13,7 +13,7 @@ import NotFound from './pages/NotFound';
 function App() {
   return (
     <>
-      {/* <GlobalStyles /> */}
+      <GlobalStyles />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/registration" element={<Registration />} />
