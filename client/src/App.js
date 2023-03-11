@@ -6,21 +6,27 @@ import HomePage from './pages/Homepage';
 
 import SinglePost from './pages/SinglePost';
 import Registration from './pages/Registration';
-import Login from './pages/Login';
+import { Login } from './pages/Login.js';
 import NotFound from './pages/NotFound';
+import { createContext } from 'react';
 
+
+export const ThemeContext = createContext('light');
 
 function App() {
   return (
     <>
       <GlobalStyles />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/registration" element={<Registration />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/posts/:id" element={<SinglePost />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+      <ThemeContext.Provider value='dark' >
+
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/registration" element={<Registration />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/posts/:id" element={<SinglePost />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </ThemeContext.Provider>
     </>
   );
 }

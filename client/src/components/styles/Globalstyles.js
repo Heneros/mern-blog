@@ -8,12 +8,12 @@ const GlobalStyles = createGlobalStyle`
 
 body {
     font-family: 'Nunito Sans', sans-serif;
-    margin: 35px;
+    /* margin: 35px; */
     background-color: #f0f4f7;
 }
 
 html {
-    background-color: #e1e6ed;
+    /* background-color: #e1e6ed; */
 }
 
 a,

@@ -18,6 +18,7 @@ export const BlogPost = ({
 
 
 
+
     const [isHovered, setIsHovered] = useState(false);
 
     const handleMouseEnter = () => {
@@ -62,7 +63,7 @@ export const BlogPost = ({
                                     {title}
                                 </Typography>
                                 <Typography variant="h5" color="inherit" paragraph>
-                                    {/* {text} */}
+                                    {text}
                                 </Typography>
                             </Box>
                         </Grid>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 
 
@@ -7,6 +7,9 @@ import Header from '../components/Header';
 import CreatePost from '../components/CreatePost';
 import { fetchPosts } from '../redux/slices/posts';
 
+
+import { ThemeContext } from '../App';
+import Tags from '../components/Tags';
 
 export default function HomePage() {
     const dispatch = useDispatch();
@@ -18,11 +21,21 @@ export default function HomePage() {
         dispatch(fetchPosts());
     }, []);
 
+
+    const theme = useContext(ThemeContext);
     ///   console.log(posts)
+    const tagStyles = {
+        backgroundColor: theme,
+        color: 'red',
+        padding: '8px',
+        borderRadius: '4px',
+    };
 
 
+    // console.log('theme', theme);///dark
     return (
-        <>
+
+        <React.Fragment>
             <Header />
             <div className='container'>
                 <div className="row">
@@ -34,7 +47,6 @@ export default function HomePage() {
                                 isLoading={true}
                             />
                         ) : (
-                   
                             <BlogPost
                                 id={obj._id}
                                 title={obj.title}
@@ -45,13 +57,14 @@ export default function HomePage() {
                         )};
                     </div>
                     <div className="col-xl-4">
-                        <div className="btns">
-                            {/* <CreatePost /> */}
+                        <div className="tags" style={ tagStyles }>
+                            tags
+                            {/* <Tags theme={theme} /> */}
                         </div>
                     </div>
                 </div>
             </div>
-        </>
+        </React.Fragment>
 
     )
 }
