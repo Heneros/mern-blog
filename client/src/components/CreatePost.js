@@ -1,7 +1,6 @@
-import { useMutation } from '@apollo/client';
+
 import React, { useEffect, useState } from 'react'
-import { ADD_POST } from '../graphql/mutations';
-import { GET_POSTS } from '../graphql/queries';
+
 
 export default function CreatePost() {
   const [name, setName] = useState('');
@@ -9,30 +8,11 @@ export default function CreatePost() {
   const [imageUrl, setImageUrl] = useState('');
 
 
-  const [addPost] = useMutation(ADD_POST, {
-    variables: { name, description, imageUrl },
-    update(cache, { data: { addPost } }) {
-      const { posts } = cache.readQuery({ query: GET_POSTS });
-      cache.writeQuery({
-        query: GET_POSTS,
-        data: { posts: [...posts, addPost] },
-      });
-    }
-  });
+
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(name, description, imageUrl);
 
-    if (name === '' || description === '' || imageUrl === '') {
-      return alert("Empty Fields");
-    }
-
-    addPost(name, description, imageUrl);
-
-    setName('');
-    setDescription('');
-    setImageUrl('');
   }
   const [count, setCount] = useState(0);
   const [calculation, setCalculation] = useState(0);
