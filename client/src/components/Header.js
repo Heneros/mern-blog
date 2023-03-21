@@ -8,13 +8,20 @@ import AppBar from '@mui/material/AppBar';
 
 import Toolbar from '@mui/material/Toolbar';
 import { useDispatch, useSelector } from 'react-redux';
-import { logout, selectIsAuth } from '../redux/slices/auth';
+import { fetchAuthMe, logout, selectIsAuth } from '../redux/slices/auth';
 import { Button } from '@mui/material';
 
 
 function Header() {
     const isAuth = useSelector(selectIsAuth);
+
     const dispatch = useDispatch();
+
+    // React.useEffect(() => {
+    //     dispatch(fetchAuthMe());
+    //     // dispatch(selectIsAuth());
+    // }, [dispatch]);
+
 
     const onClickLogout = () => {
         if (window.confirm("Are you sure you want to log out")) {
@@ -41,8 +48,11 @@ function Header() {
                         <Box sx={{ display: 'inline-flex', flexDirection: 'row' }}>
                             {isAuth ? (
                                 <>
-                                    <Typography sx={{ my: 1, mx: 1.5 }}>
+                                    {/* <Typography sx={{ my: 1, mx: 1.5 }}>
                                         <Button onClick={onClickLogout} >Log Out</Button>
+                                    </Typography> */}
+                                    <Typography sx={{ my: 1, mx: 1.5 }}>
+                                        <Link to="/create-post">Create Post</Link>
                                     </Typography>
                                 </>
                             ) : (
