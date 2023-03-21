@@ -902,6 +902,21 @@ textarea.form-control {
 .hovered{
     background-color: rgba(0,0,0,0.5);
 }
+
+
+.link-header{
+    color: blue;
+    font-family: "Roboto","Helvetica","Arial",sans-serif;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.5;
+    letter-spacing: 0.00938em;
+    margin-top: 0;
+
+    height: 100%;
+  display: flex;
+  align-items: center;
+}
 `;
 
 

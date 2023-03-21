@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import { Box, Paper } from '@mui/material';
-import { useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 
 
 export const BlogPost = ({
@@ -14,22 +14,21 @@ export const BlogPost = ({
     text,
     imageUrl
 }) => {
+
+
     const paperRef = useRef(null);
-
-
-
 
     const [isHovered, setIsHovered] = useState(false);
 
-    const handleMouseEnter = () => {
+    const handleMouseEnter = useCallback(() => {
         setIsHovered(true);
         paperRef.current.classList.add('hovered');
-    }
+    }, [paperRef]);
 
-    const handleMouseLeave = () => {
+    const handleMouseLeave = useCallback(() => {
         setIsHovered(false);
         paperRef.current.classList.remove('hovered');
-    }
+    }, [paperRef]);
 
     return (
         <>
@@ -50,24 +49,24 @@ export const BlogPost = ({
                     onMouseLeave={handleMouseLeave}
                 >
                     <Link to={`/posts/${id}`}  >
-                    <Grid container>
-                        <Grid item md={6}>
-                            <Box
-                                sx={{
-                                    position: 'relative',
-                                    p: { xs: 3, md: 6 },
-                                    pr: { md: 0 },
-                                }}
-                            >
-                                <Typography component="h1" variant="h3" gutterBottom>
-                                    {title}
-                                </Typography>
-                                <Typography variant="h5" color="inherit" paragraph>
-                                    {text}
-                                </Typography>
-                            </Box>
+                        <Grid container>
+                            <Grid item md={6}>
+                                <Box
+                                    sx={{
+                                        position: 'relative',
+                                        p: { xs: 3, md: 6 },
+                                        pr: { md: 0 },
+                                    }}
+                                >
+                                    <Typography component="h1" variant="h3" gutterBottom>
+                                        {title}
+                                    </Typography>
+                                    <Typography variant="h5" color="inherit" paragraph>
+                                        {text}
+                                    </Typography>
+                                </Box>
+                            </Grid>
                         </Grid>
-                    </Grid>
                     </Link>
                 </Paper>
             </Grid >
