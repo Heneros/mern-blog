@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import Header from '../components/Header';
 import { selectIsAuth } from '../redux/slices/auth';
+import { Button } from '@mui/material';
 
 
 export default function CreatePost() {
@@ -18,12 +19,23 @@ export default function CreatePost() {
     const isEditing = Boolean(id);
 
     const handleChangeFile = async (event) => {
+        try {
+            const formData = new FormData();
+            const file = event.target.files[0];
 
+        } catch (err) {
+
+        }
     };
     return (
         <>
             <Header />
-            <div>CreatePost</div>
+            <div>
+                <Button onClick={() => inputFileRef.current.click()}>
+                    Load Image
+                </Button>
+                <input ref={inputFileRef} type='file' onChange={handleChangeFile} />
+            </div>
         </>
 
     )
