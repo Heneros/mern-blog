@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, Navigate, useParams } from 'react-router-dom';
 import Header from '../components/Header';
 import { selectIsAuth } from '../redux/slices/auth';
 import { Button } from '@mui/material';
@@ -53,7 +53,24 @@ export default function CreatePost() {
     const onChange = useCallback((value) => {
         setText(value)
     }, []);
-    
+
+    if (!window.localStorage.getItem('token') && !isAuth) {
+        return <Navigate to="/" />
+    }
+
+    const onSubmit = async () => {
+        try {
+            const fields = {
+                title,
+                text,
+                imageUrl,
+                tags
+            };
+        } catch (err) {
+
+        }
+    }
+
     return (
         <>
             <Header />
