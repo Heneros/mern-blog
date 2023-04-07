@@ -66,8 +66,13 @@ export default function CreatePost() {
                 imageUrl,
                 tags
             };
+            const { data } = isEditing
+                ? await axios.patch(`/posts/${id}`, fields)
+                : await axios.post(`/posts/${id}`, fields)
+            const _id = isEditing ? id : data._id;
+            navigate(`/posts/${_id}`);
         } catch (err) {
-
+            console.warn(err);
         }
     }
 
