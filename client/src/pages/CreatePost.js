@@ -1,9 +1,12 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux';
 import { useNavigate, Navigate, useParams } from 'react-router-dom';
+import SimpleMDE from 'react-simplemde-editor';
+import { Button, TextField } from '@mui/material';
+
+
 import Header from '../components/Header';
 import { selectIsAuth } from '../redux/slices/auth';
-import { Button } from '@mui/material';
 import axios from '../axios';
 
 
@@ -84,6 +87,23 @@ export default function CreatePost() {
                     Load Image
                 </Button>
                 <input ref={inputFileRef} type='file' onChange={handleChangeFile} />
+                <br />
+                <br />
+                <TextField
+                    variant='standard'
+                    placeholder="Title post..."
+                    fullWidth
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                />
+                <TextField
+                    variant='standard'
+                    placeholder="Tags post..."
+                    fullWidth
+                    value={tags}
+                    onChange={(e) => setTags(e.target.value)}
+                />
+                <SimpleMDE value={text} />
             </div>
         </>
 

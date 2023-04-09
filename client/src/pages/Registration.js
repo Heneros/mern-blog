@@ -25,8 +25,8 @@ export default function Registration() {
     const { register, handleSubmit, formState: { errors, isValid } } = useForm({
         defaultValues: {
             fullName: 'Gordon',
-            email: 'Freeman',
-            password: '123456d'
+            email: 'freeman@gmail.com',
+            password: '123dadaya'
         },
         mode: 'onChange'
     });

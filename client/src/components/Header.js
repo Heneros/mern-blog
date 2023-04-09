@@ -8,7 +8,7 @@ import AppBar from '@mui/material/AppBar';
 
 import Toolbar from '@mui/material/Toolbar';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchAuth, logout, selectIsAuth } from '../redux/slices/auth';
+import { fetchAuthMe, logout, selectIsAuth } from '../redux/slices/auth';
 import { Button } from '@mui/material';
 
 
@@ -18,6 +18,9 @@ function Header() {
 
     const dispatch = useDispatch();
 
+    React.useEffect(() => {
+        dispatch(fetchAuthMe());
+    }, [dispatch]);
 
     const onClickLogout = () => {
         if (window.confirm("Are you sure you want to log out")) {
@@ -25,6 +28,7 @@ function Header() {
             window.localStorage.removeItem('token');
         }
     }
+
 
     return (
         <>
