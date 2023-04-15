@@ -87,6 +87,11 @@ export default function CreatePost() {
                     Load Image
                 </Button>
                 <input ref={inputFileRef} type='file' onChange={handleChangeFile} />
+                {imageUrl && (
+                    <>
+                        <img src={`http://localhost:5000${imageUrl}`} alt="image uploaded" />
+                    </>
+                )}
                 <br />
                 <br />
                 <TextField
@@ -104,6 +109,9 @@ export default function CreatePost() {
                     onChange={(e) => setTags(e.target.value)}
                 />
                 <SimpleMDE value={text} />
+                <Button onClick={onSubmit} size='large' variant='contained'>
+                    {isEditing ? 'Save' : 'Publish'}
+                </Button>
             </div>
         </>
 
