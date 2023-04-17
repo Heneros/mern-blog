@@ -60,7 +60,7 @@ export const login = async (req, res) => {
             {
                 _id: user._id,
             },
-            'uniquekey'
+            'keyunique'
             , {
                 expiresIn: '30d'
             }
