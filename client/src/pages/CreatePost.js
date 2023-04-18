@@ -34,20 +34,20 @@ export default function CreatePost() {
         }
     };
 
-    useEffect(() => {
-        if (id) {
-            axios
-                .get(`/posts/${id}`).then(({ data }) => {
-                    setTitle(data.title);
-                    setText(data.text);
-                    setImageUrl(data.imageUrl);
-                    setTags(data.tags).join(',');
-                })
-                .catch((err) => {
-                    console.warn(err);
-                })
-        }
-    }, []);
+    // useEffect(() => {
+    //     if (id) {
+    //         axios
+    //             .get(`/posts/${id}`).then(({ data }) => {
+    //                 setTitle(data.title);
+    //                 setText(data.text);
+    //                 setImageUrl(data.imageUrl);
+    //                 setTags(data.tags).join(',');
+    //             })
+    //             .catch((err) => {
+    //                 console.warn(err);
+    //             })
+    //     }
+    // }, []);
 
     const onClickRemoveImage = () => {
         setImageUrl('');
@@ -71,7 +71,7 @@ export default function CreatePost() {
             };
             const { data } = isEditing
                 ? await axios.patch(`/posts/${id}`, fields)
-                : await axios.post(`/posts/${id}`, fields)
+                : await axios.post(`/posts`, fields)
             const _id = isEditing ? id : data._id;
             navigate(`/posts/${_id}`);
         } catch (err) {
@@ -89,6 +89,9 @@ export default function CreatePost() {
                 <input ref={inputFileRef} type='file' onChange={handleChangeFile} />
                 {imageUrl && (
                     <>
+                        <Button>
+                            Remove
+                        </Button>
                         <img src={`http://localhost:5000${imageUrl}`} alt="image uploaded" />
                     </>
                 )}
@@ -108,7 +111,8 @@ export default function CreatePost() {
                     value={tags}
                     onChange={(e) => setTags(e.target.value)}
                 />
-                <SimpleMDE value={text} />
+                <SimpleMDE value={text} onChange={onChange} />
+
                 <Button onClick={onSubmit} size='large' variant='contained'>
                     {isEditing ? 'Save' : 'Publish'}
                 </Button>
