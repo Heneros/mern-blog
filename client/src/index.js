@@ -1,19 +1,52 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
-// import 'bootstrap/dist/css/bootstrap.css';
-import App from './App';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+
 import { Provider } from 'react-redux';
 import store from './redux/store';
+import HomePage from './pages/Homepage';
+import NotFound from './pages/NotFound';
 
+
+import SinglePost from './pages/SinglePost';
+import Registration from './pages/Registration';
+import { Login } from './pages/Login.js';
+import CreatePost from './pages/CreatePost';
+import { BlogPosts } from './components/BlogPosts';
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <HomePage />,
+    errorElement: <NotFound />,
+    children: [
+      {
+        path: 'create-post',
+        element: <CreatePost />,
+      },
+      {
+        path: 'single-post',
+        element: <SinglePost />,
+      },
+      {
+        path: '/',
+        element: <BlogPosts />,
+      },
+      {
+        path: 'registration',
+        element: <Registration />,
+      },
+      {
+        path: 'login',
+        element: <Login />,
+      },
+    ],
+  },
+]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <Provider store={store}>
-        <App />
-      </Provider>
-    </BrowserRouter>
-  </React.StrictMode>
+  <Provider store={store}  >
+    <RouterProvider router={router} />
+  </Provider>
 );
