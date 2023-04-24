@@ -46,6 +46,20 @@ const postsSlice = createSlice({
             state.posts.items = [];
             state.posts.status = 'error'
         },
+
+        [fetchTags.pending]: (state) => {
+            state.tags.status = 'loading';
+            state.tags.items = [];
+        },
+        [fetchTags.fulfilled]: (state, action) => {
+            state.tags.status = 'loaded';
+            state.tags.items = action.payload;
+        },
+        [fetchTags.pending]: (state) => {
+            state.tags.status = 'error';
+            state.tags.items = [];
+        },
+
         [fetchRemovePost.pending]: (state, action) => {
             ///Поиск статьи obj._id и сравнением
             state.posts.items = state.posts.items.filter((obj) => obj._id !== action.meta.arg)

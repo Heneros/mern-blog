@@ -28,7 +28,7 @@ export default function SinglePost() {
 
     return (
         <>
-            <Header />
+     
 
             <p>
                 {data?.text}

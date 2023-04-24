@@ -13,6 +13,7 @@ import Registration from './pages/Registration';
 import { Login } from './pages/Login.js';
 import CreatePost from './pages/CreatePost';
 import { BlogPosts } from './components/BlogPosts';
+import { BlogPost } from './components/BlogPost';
 
 const router = createBrowserRouter([
   {
@@ -24,13 +25,17 @@ const router = createBrowserRouter([
         path: 'create-post',
         element: <CreatePost />,
       },
-      {
-        path: 'single-post',
-        element: <SinglePost />,
-      },
+      // {
+      //   path: 'single-post',
+      //   element: <SinglePost />,
+      // },
       {
         path: '/',
         element: <BlogPosts />,
+      },
+      {
+        path: 'posts/:id',
+        element: <SinglePost />,
       },
       {
         path: 'registration',

@@ -48,7 +48,7 @@ export default function Registration() {
 
     return (
         <>
-            <Header />
+            {/* <Header /> */}
             <Container component="main" maxWidth="xs">
                 <CssBaseline />
                 <Box sx={{
