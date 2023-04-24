@@ -9,15 +9,11 @@ export default function HomePage() {
 
     // console.log('theme', theme);///dark
     return (
-
         <React.Fragment>
             <Header />
             <div className="container">
                 <Outlet />
-
             </div>
-
-
         </React.Fragment>
 
     )

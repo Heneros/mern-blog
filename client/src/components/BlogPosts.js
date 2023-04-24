@@ -10,7 +10,7 @@ import { fetchPosts } from '../redux/slices/posts';
 
 import Tags from './Tags';
 
-export function BlogPosts() {
+export const BlogPosts = ({ id, title, tags, children }) => {
     const dispatch = useDispatch();
     const { posts } = useSelector(state => state.posts);
 
@@ -57,8 +57,7 @@ export function BlogPosts() {
                     <div className="col-xl-4">
                         {/* <div className="tags" style={ tagStyles }> */}
                         <div className="tags">
-                            tags
-                            {/* <Tags theme={theme} /> */}
+                            <Tags />
                         </div>
                     </div>
                 </div>

@@ -28,8 +28,6 @@ export default function SinglePost() {
 
     return (
         <>
-     
-
             <p>
                 {data?.text}
             </p>
